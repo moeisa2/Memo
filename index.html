@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Sundus ❤️ - لعبة حبي</title>
+  <title> V 0.1 </title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -517,7 +517,7 @@
   <!-- Login -->
   <div class="login" id="login">
     <div class="login-brand">
-      <h1 id="gameTitle">XO</h1>
+      <h1 id="gameTitle">MoXo</h1>
       <p id="loginSub">سجل للعب مع الأصدقاء</p>
     </div>
     <div class="field">
@@ -630,7 +630,7 @@
         <div><div class="label" id="toastP1">اللاعب 1</div><div class="num c1" id="toastS1">0</div></div>
         <div><div class="label" id="toastP2">اللاعب 2</div><div class="num c2" id="toastS2">0</div></div>
       </div>
-      <div class="toast-foot"><span id="toastTime"></span><span id="toastFooter">لعبة حبي</span></div>
+      <div class="toast-foot"><span id="toastTime"></span><span id="toastFooter"></span></div>
     </div>
   </div>
 
@@ -739,7 +739,7 @@
     let currentLang = localStorage.getItem('lang') || 'ar';
     const t = {
       ar: {
-        title: 'XO - لعبة حبي',
+        title: 'MoXo - ',
         loginSub: 'سجل للعب مع الأصدقاء',
         nameLabel: 'الاسم', namePH: 'أدخل اسمك',
         roomLabel: 'رمز الغرفة', roomPH: 'أدخل رمز الغرفة',
@@ -754,14 +754,14 @@
         fwdOrig: 'الرسالة الأصلية', fwdPH: 'اكتب تعليقًا...',
         fwdCancel: 'إلغاء', fwdSend: 'إرسال',
         toastTitle: 'رسالة جديدة', toastSub: 'من لاعب في الغرفة',
-        toastFt: 'لعبة حبي',
+        toastFt: 'v 0.1 ',
         winSuffix: ' فاز!',
         exit: 'خروج',
         errFull: 'الغرفة ممتلئة!', errConn: 'فشل الاتصال: ',
         fwdPrefix: '📩 تم إعادة التوجيه'
       },
       en: {
-        title: 'XO - Love Game',
+        title: 'MoXo',
         loginSub: 'Sign in to play with friends',
         nameLabel: 'Name', namePH: 'Enter your name',
         roomLabel: 'Room Code', roomPH: 'Enter room code',
@@ -789,7 +789,7 @@
       document.documentElement.lang = currentLang;
       document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
       document.title = l.title;
-      dom.gameTitle && (dom.gameTitle.textContent = 'XO');
+      dom.gameTitle && (dom.gameTitle.textContent = 'MoXo');
       dom.loginSub && (dom.loginSub.textContent = l.loginSub);
       dom.nameLabel && (dom.nameLabel.textContent = l.nameLabel);
       dom.nameInput && (dom.nameInput.placeholder = l.namePH);
