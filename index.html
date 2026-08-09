@@ -517,7 +517,7 @@
   <!-- Login -->
   <div class="login" id="login">
     <div class="login-brand">
-      <h1 id="gameTitle">MoXo</h1>
+      <h1 id="gameTitle">Memo</h1>
       <p id="loginSub">سجل للعب مع الأصدقاء</p>
     </div>
     <div class="field">
@@ -739,7 +739,7 @@
     let currentLang = localStorage.getItem('lang') || 'ar';
     const t = {
       ar: {
-        title: 'MoXo - ',
+        title: 'Memo - ',
         loginSub: 'سجل للعب مع الأصدقاء',
         nameLabel: 'الاسم', namePH: 'أدخل اسمك',
         roomLabel: 'رمز الغرفة', roomPH: 'أدخل رمز الغرفة',
@@ -761,7 +761,7 @@
         fwdPrefix: '📩 تم إعادة التوجيه'
       },
       en: {
-        title: 'MoXo',
+        title: 'Memo',
         loginSub: 'Sign in to play with friends',
         nameLabel: 'Name', namePH: 'Enter your name',
         roomLabel: 'Room Code', roomPH: 'Enter room code',
@@ -789,7 +789,7 @@
       document.documentElement.lang = currentLang;
       document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
       document.title = l.title;
-      dom.gameTitle && (dom.gameTitle.textContent = 'MoXo');
+      dom.gameTitle && (dom.gameTitle.textContent = 'Memo');
       dom.loginSub && (dom.loginSub.textContent = l.loginSub);
       dom.nameLabel && (dom.nameLabel.textContent = l.nameLabel);
       dom.nameInput && (dom.nameInput.placeholder = l.namePH);
