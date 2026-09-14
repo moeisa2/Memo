@@ -195,18 +195,22 @@
     }
     .room-badge span { font-size: 14px; font-weight: 700; color: var(--text); }
     .room-badge small { font-weight: 500; color: var(--text-muted); }
-    .scores { display: flex; gap: 8px; }
+    .scores { display: flex; gap: 6px; flex-wrap: wrap; justify-content: flex-end; }
     .score-card {
-      min-width: 70px; text-align: center; padding: 4px 12px;
+      min-width: 62px; text-align: center; padding: 4px 10px;
       border-radius: var(--radius); background: var(--bg-subtle);
       transition: all 0.3s ease;
     }
     .score-card.p1 { border: 1px solid rgba(244,63,94,0.08); }
     .score-card.p2 { border: 1px solid rgba(14,165,233,0.08); }
+    .score-card.p3 { border: 1px solid rgba(245,158,11,0.08); }
+    .score-card.p4 { border: 1px solid rgba(34,197,94,0.08); }
     .score-card .label { font-size: 11px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.3px; font-weight: 600; }
     .score-card .num { font-size: 20px; font-weight: 800; }
     .score-card.p1 .num { color: var(--rose); }
     .score-card.p2 .num { color: var(--sky); }
+    .score-card.p3 .num { color: #f59e0b; }
+    .score-card.p4 .num { color: #22c55e; }
     .turn-info {
       display: flex; align-items: center; justify-content: center;
       gap: 8px; margin-bottom: 14px;
@@ -249,7 +253,7 @@
       touch-action: manipulation; -webkit-tap-highlight-color: transparent;
       position: relative;
     }
-    .cell:active:not(.X):not(.O) { transform: scale(0.92); }
+    .cell:active:not(.X):not(.O):not(.Y):not(.Z) { transform: scale(0.92); }
     .cell.placed { animation: cellPlace 0.3s var(--spring); }
     @keyframes cellPlace {
       0% { transform: scale(0.4); opacity: 0.3; }
@@ -257,7 +261,7 @@
       100% { transform: scale(1); opacity: 1; }
     }
     @media (hover: hover) {
-      .cell:hover:not(.X):not(.O) { background: var(--surface-hover); border-color: rgba(244,63,94,0.25); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(244,63,94,0.1); }
+      .cell:hover:not(.X):not(.O):not(.Y):not(.Z) { background: var(--surface-hover); border-color: rgba(244,63,94,0.25); transform: translateY(-2px); box-shadow: 0 6px 16px rgba(244,63,94,0.1); }
       .btn:hover { background: var(--surface-hover); transform: translateY(-1px); }
       .btn-primary:hover { box-shadow: 0 8px 28px rgba(244,63,94,0.4); transform: translateY(-2px); }
       .chat-fab:hover { transform: scale(1.08); box-shadow: 0 10px 28px rgba(244,63,94,0.3); }
@@ -265,8 +269,12 @@
     }
     .cell.X { color: var(--rose); text-shadow: 0 0 16px rgba(244,63,94,0.2); background: rgba(244,63,94,0.06); border-color: rgba(244,63,94,0.2); }
     .cell.O { color: var(--sky); text-shadow: 0 0 16px rgba(14,165,233,0.2); background: rgba(14,165,233,0.06); border-color: rgba(14,165,233,0.2); }
+    .cell.Y { color: #f59e0b; text-shadow: 0 0 16px rgba(245,158,11,0.2); background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.2); }
+    .cell.Z { color: #22c55e; text-shadow: 0 0 16px rgba(34,197,94,0.2); background: rgba(34,197,94,0.06); border-color: rgba(34,197,94,0.2); }
     .cell.win.X { box-shadow: 0 0 20px 4px rgba(244,63,94,0.3), inset 0 0 16px rgba(244,63,94,0.06); border-color: rgba(244,63,94,0.4); background: rgba(244,63,94,0.08); }
     .cell.win.O { box-shadow: 0 0 20px 4px rgba(14,165,233,0.3), inset 0 0 16px rgba(14,165,233,0.06); border-color: rgba(14,165,233,0.4); background: rgba(14,165,233,0.08); }
+    .cell.win.Y { box-shadow: 0 0 20px 4px rgba(245,158,11,0.3), inset 0 0 16px rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.4); background: rgba(245,158,11,0.08); }
+    .cell.win.Z { box-shadow: 0 0 20px 4px rgba(34,197,94,0.3), inset 0 0 16px rgba(34,197,94,0.06); border-color: rgba(34,197,94,0.4); background: rgba(34,197,94,0.08); }
     .btn {
       display: inline-flex; align-items: center; justify-content: center; gap: 8px;
       padding: 12px 22px; font-size: 14px; font-weight: 600; font-family: inherit;
@@ -311,8 +319,8 @@
     .msg-bubble { max-width: 88%; padding: 10px 14px; border-radius: 16px; font-size: 13px; line-height: 1.5; word-break: break-word; position: relative; }
     .msg-wrap.sent .msg-bubble { background: rgba(244, 63, 94, 0.12); border-bottom-right-radius: 4px; }
     .msg-wrap.received .msg-bubble { background: rgba(149, 117, 205, 0.06); border: 1px solid rgba(149, 117, 205, 0.08); border-bottom-left-radius: 4px; }
-    .msg-sender { font-size: 10px; font-weight: 700; color: var(--rose-light); margin-bottom: 4px; letter-spacing: 0.3px; text-transform: uppercase; }
-    .msg-wrap.received .msg-sender { color: var(--sky-light); }
+    .msg-sender { font-size: 11px; font-weight: 700; color: var(--rose-light); margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(244, 63, 94, 0.15); letter-spacing: 0.5px; text-transform: uppercase; }
+    .msg-wrap.received .msg-sender { color: var(--sky-light); border-bottom-color: rgba(149, 117, 205, 0.15); }
     .msg-text { font-size: 13px; line-height: 1.6; color: var(--text); white-space: pre-wrap; }
     .msg-fwd { margin: -6px -10px 6px; padding: 10px 10px 10px 14px; background: var(--bg); border-radius: 12px; position: relative; }
     .msg-fwd::before { content: ''; position: absolute; left: 0; top: 8px; bottom: 8px; width: 3px; border-radius: 3px; background: linear-gradient(180deg, var(--rose), var(--violet)); }
@@ -396,13 +404,7 @@
     .toast-title { font-weight: 700; font-size: 14px; color: var(--text); }
     .toast-sub { font-size: 11px; color: var(--text-muted); }
     .toast-msg { padding: 10px 12px; background: rgba(232,89,110,0.03); border-inline-start: 3px solid var(--rose); font-size: 13px; color: var(--text); line-height: 1.5; margin-bottom: 12px; }
-    .toast-msg .sender { font-weight: 700; color: var(--rose-light); }
-    .toast-scores { display: flex; gap: 10px; background: var(--bg-subtle); border-radius: 8px; padding: 10px; border: 1px solid var(--border-subtle); }
-    .toast-scores > div:first-child { border-inline-end: 1px solid var(--border-subtle); }
-    .toast-scores .label { font-size: 11px; color: var(--text-muted); }
-    .toast-scores .num { font-size: 18px; font-weight: 800; }
-    .toast-scores .num.c1 { color: var(--rose-light); }
-    .toast-scores .num.c2 { color: var(--sky-light); }
+    .toast-msg .sender { font-weight: 700; color: var(--rose-light); margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid rgba(232,89,110,0.1); display: block; }
     .toast-foot { display: flex; justify-content: space-between; margin-top: 10px; font-size: 10px; color: var(--text-muted); }
     .confetti-container { position: fixed; inset: 0; pointer-events: none; z-index: 1000; display: none; }
     .confetti-piece { position: absolute; opacity: 0; animation: confettiFall 3s ease-in-out forwards; }
@@ -416,7 +418,7 @@
     }
     #musicBtn { top: 16px; right: 16px; display: none; }
     #themeBtn { top: 16px; right: 64px; }
-    #langBtn { top: 16px; right: 112px; }
+    #langBtn { top: 16px; right: 112px; font-size: 12px; font-weight: 700; letter-spacing: 0.5px; }
     #musicBtn:active, #themeBtn:active, #langBtn:active { transform: scale(0.92); }
     @media (hover: hover) { #musicBtn:hover, #themeBtn:hover, #langBtn:hover { background: var(--surface-hover); color: var(--text); transform: scale(1.08); box-shadow: var(--shadow-md); } }
     .err-toast {
@@ -510,14 +512,14 @@
   <div class="bg-grid"></div>
   <div class="particles" id="particles"></div>
   <div class="confetti-container" id="confettiContainer"></div>
-  <button id="musicBtn">🔇</button>
-  <button id="themeBtn">🌙</button>
+  <button id="musicBtn">♪</button>
+  <button id="themeBtn">◑</button>
   <button id="langBtn">EN</button>
 
   <!-- Login -->
   <div class="login" id="login">
     <div class="login-brand">
-      <h1 id="gameTitle">Memo</h1>
+      <h1 id="gameTitle">MEMO</h1>
       <p id="loginSub">سجل للعب مع الأصدقاء</p>
     </div>
     <div class="field">
@@ -548,6 +550,14 @@
           <div class="score-card p2">
             <span class="label" id="p2Name">اللاعب 2</span>
             <span class="num" id="p2Score">0</span>
+          </div>
+          <div class="score-card p3" style="display:none">
+            <span class="label" id="p3Name">اللاعب 3</span>
+            <span class="num" id="p3Score">0</span>
+          </div>
+          <div class="score-card p4" style="display:none">
+            <span class="label" id="p4Name">اللاعب 4</span>
+            <span class="num" id="p4Score">0</span>
           </div>
         </div>
       </div>
@@ -580,7 +590,7 @@
   <!-- Floating Message Actions -->
   <div class="msg-actions" id="msgActions">
     <button class="msg-actions-btn" id="actForward">↩</button>
-    <button class="msg-actions-btn" id="actCopy">📋</button>
+    <button class="msg-actions-btn" id="actCopy">⧉</button>
   </div>
 
   <!-- Forward Dialog -->
@@ -626,10 +636,6 @@
         </div>
       </div>
       <div class="toast-msg"><span class="sender" id="toastSender"></span><span id="toastMsg"></span></div>
-      <div class="toast-scores">
-        <div><div class="label" id="toastP1">اللاعب 1</div><div class="num c1" id="toastS1">0</div></div>
-        <div><div class="label" id="toastP2">اللاعب 2</div><div class="num c2" id="toastS2">0</div></div>
-      </div>
       <div class="toast-foot"><span id="toastTime"></span><span id="toastFooter"></span></div>
     </div>
   </div>
@@ -655,6 +661,16 @@
     const GRID = 15;
     const WIN = 6;
     const TOTAL_CELLS = GRID * GRID;
+    const SYMBOLS = ['X', 'O', 'Y', 'Z'];
+    const SYMBOL_PLAYER = { X: 'player1', O: 'player2', Y: 'player3', Z: 'player4' };
+    const PLAYER_SYMBOL = { player1: 'X', player2: 'O', player3: 'Y', player4: 'Z' };
+    const PLAYER_KEYS = ['player1', 'player2', 'player3', 'player4'];
+    const PLAYER_COLORS = {
+      X: { text: '#fb7185', bg: 'rgba(244,63,94,0.10)', bd: 'rgba(244,63,94,0.18)' },
+      O: { text: '#38bdf8', bg: 'rgba(14,165,233,0.10)', bd: 'rgba(14,165,233,0.18)' },
+      Y: { text: '#fbbf24', bg: 'rgba(245,158,11,0.10)', bd: 'rgba(245,158,11,0.18)' },
+      Z: { text: '#4ade80', bg: 'rgba(34,197,94,0.10)', bd: 'rgba(34,197,94,0.18)' }
+    };
 
     // ─── Sound Engine ───
     const Sound = {
@@ -691,11 +707,12 @@
       login: $('login'), game: $('game'), grid: $('grid'), winner: $('winner'),
       roomTitle: $('roomTitle'), turnDot: $('turnDot'), turnText: $('turnText'),
       p1Name: $('p1Name'), p2Name: $('p2Name'), p1Score: $('p1Score'), p2Score: $('p2Score'),
+      p3Name: $('p3Name'), p4Name: $('p4Name'), p3Score: $('p3Score'), p4Score: $('p4Score'),
       restartBtn: $('restartBtn'), exitBtn: $('exitBtn'), joinBtn: $('joinBtn'), loginLoading: $('loginLoading'),
       chatMsgs: $('chatMsgs'), chatInput: $('chatInput'), sendBtn: $('sendBtn'), chatOverlay: $('chatOverlay'),
       chatFab: $('chatFab'), badge: $('badge'), chatClose: $('chatClose'),
       toast: $('toast'), toastSender: $('toastSender'), toastMsg: $('toastMsg'),
-      toastP1: $('toastP1'), toastP2: $('toastP2'), toastS1: $('toastS1'), toastS2: $('toastS2'), toastTime: $('toastTime'),
+      toastTime: $('toastTime'),
       toastClose: $('toastClose'), musicBtn: $('musicBtn'), themeBtn: $('themeBtn'),
       msgActions: $('msgActions'), actForward: $('actForward'), actCopy: $('actCopy'),
       forwardOverlay: $('forwardOverlay'), forwardTarget: $('forwardTarget'),
@@ -706,6 +723,7 @@
       nameLabel: $('nameLabel'), roomLabel: $('roomLabel'),
       loginLoadingText: $('loginLoadingText'), roomBadge: $('roomBadge'),
       p1Label: $('p1Name'), p2Label: $('p2Name'),
+      p3Label: $('p3Name'), p4Label: $('p4Name'),
       chatTitle: $('chatTitle'),
       fwdTitle: $('fwdTitle'), fwdTo: $('fwdTo'),
       fwdOriginalLabel: $('fwdOriginalLabel'),
@@ -728,6 +746,7 @@
       chatClosing: false,
       isComposing: false,
       activeMsgText: '',
+      lastWinner: null,
       bgNodes: null,
       melTimer: null,
       melIndex: 0,
@@ -736,16 +755,16 @@
     };
 
     // ─── Translations ───
-    let currentLang = localStorage.getItem('lang') || 'ar';
+    let currentLang = localStorage.getItem('lang') === 'en' ? 'en' : 'ar';
     const t = {
       ar: {
-        title: 'Memo - ',
+        title: 'MEMO - ',
         loginSub: 'سجل للعب مع الأصدقاء',
         nameLabel: 'الاسم', namePH: 'أدخل اسمك',
         roomLabel: 'رمز الغرفة', roomPH: 'أدخل رمز الغرفة',
         joinBtn: 'ابدأ اللعبة', loading: 'جارٍ الاتصال...',
         roomBadge: 'الغرفة',
-        p1: 'اللاعب 1', p2: 'اللاعب 2',
+        p1: 'اللاعب 1', p2: 'اللاعب 2', p3: 'اللاعب 3', p4: 'اللاعب 4',
         waiting: 'بانتظار لاعب آخر...',
         yourTurn: 'دورك الآن!', waitingOpp: 'بانتظار الخصم...',
         restart: '↻ العب مرة أخرى',
@@ -756,18 +775,20 @@
         toastTitle: 'رسالة جديدة', toastSub: 'من لاعب في الغرفة',
         toastFt: 'v 0.1 ',
         winSuffix: ' فاز!',
+        draw: 'تعادل!',
         exit: 'خروج',
         errFull: 'الغرفة ممتلئة!', errConn: 'فشل الاتصال: ',
-        fwdPrefix: '📩 تم إعادة التوجيه'
+        fwdPrefix: '📩 تم إعادة التوجيه',
+        leftMsg: 'غادر الغرفة'
       },
       en: {
-        title: 'Memo',
+        title: 'MEMO',
         loginSub: 'Sign in to play with friends',
         nameLabel: 'Name', namePH: 'Enter your name',
         roomLabel: 'Room Code', roomPH: 'Enter room code',
         joinBtn: 'Start Game', loading: 'Connecting...',
         roomBadge: 'Room',
-        p1: 'Player 1', p2: 'Player 2',
+        p1: 'Player 1', p2: 'Player 2', p3: 'Player 3', p4: 'Player 4',
         waiting: 'Waiting for other player...',
         yourTurn: 'Your Turn!', waitingOpp: 'Waiting for opponent...',
         restart: '↻ Play Again',
@@ -779,8 +800,10 @@
         toastFt: '',
         exit: 'Exit',
         winSuffix: ' wins!',
+        draw: 'It\'s a Draw!',
         errFull: 'Room is full!', errConn: 'Connection failed: ',
-        fwdPrefix: '📩 Forwarded'
+        fwdPrefix: '📩 Forwarded',
+        leftMsg: 'has left the room'
       }
     };
 
@@ -789,7 +812,7 @@
       document.documentElement.lang = currentLang;
       document.documentElement.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
       document.title = l.title;
-      dom.gameTitle && (dom.gameTitle.textContent = 'Memo🪱');
+      dom.gameTitle && (dom.gameTitle.textContent = 'MEMO');
       dom.loginSub && (dom.loginSub.textContent = l.loginSub);
       dom.nameLabel && (dom.nameLabel.textContent = l.nameLabel);
       dom.nameInput && (dom.nameInput.placeholder = l.namePH);
@@ -800,6 +823,8 @@
       dom.roomBadge && (dom.roomBadge.childNodes[0].textContent = l.roomBadge + ' ');
       dom.p1Label && (dom.p1Label.textContent = l.p1);
       dom.p2Label && (dom.p2Label.textContent = l.p2);
+      dom.p3Label && (dom.p3Label.textContent = l.p3);
+      dom.p4Label && (dom.p4Label.textContent = l.p4);
       dom.restartBtn && (dom.restartBtn.textContent = l.restart);
       dom.chatTitle && (dom.chatTitle.textContent = l.chatTitle);
       dom.chatInput && (dom.chatInput.placeholder = l.chatPH);
@@ -813,26 +838,35 @@
       dom.toastTitle && (dom.toastTitle.textContent = l.toastTitle);
       dom.toastSub && (dom.toastSub.textContent = l.toastSub);
       dom.toastFooter && (dom.toastFooter.textContent = l.toastFt);
-      dom.langBtn.textContent = currentLang === 'ar' ? 'EN' : 'AR';
+      dom.langBtn.textContent = currentLang === 'ar' ? 'EN' : 'ع';
       dom.exitBtn && (dom.exitBtn.textContent = l.exit);
       // update dynamic text if game is active
       if (state.roomData) {
         dom.p1Name.textContent = state.roomData.players?.player1 || l.p1;
         dom.p2Name.textContent = state.roomData.players?.player2 || l.p2;
+        dom.p3Name.textContent = state.roomData.players?.player3 || l.p3;
+        dom.p4Name.textContent = state.roomData.players?.player4 || l.p4;
         if (state.roomData.status === 'playing') {
           dom.turnText.textContent = state.isMyTurn ? l.yourTurn : l.waitingOpp;
         } else {
           dom.turnText.textContent = l.waiting;
         }
-        dom.toastP1.textContent = state.roomData.players?.player1 || l.p1;
-        dom.toastP2.textContent = state.roomData.players?.player2 || l.p2;
+        if (state.roomData.winner) {
+          const w = state.roomData.winner;
+          if (w.symbol === 'DRAW') {
+            dom.winner.textContent = l.draw;
+          } else {
+            const wn = state.roomData.players[SYMBOL_PLAYER[w.symbol]] || l.p1;
+            dom.winner.textContent = '🎉 ' + wn + l.winSuffix;
+          }
+        }
       }
     }
 
     // ─── Theme ───
     let darkMode = localStorage.getItem('theme') === 'dark';
     if (darkMode) document.documentElement.setAttribute('data-theme', 'dark');
-    dom.themeBtn.textContent = darkMode ? '☀️' : '🌙';
+    dom.themeBtn.textContent = darkMode ? '◐' : '◑';
     dom.langBtn.onclick = () => {
       currentLang = currentLang === 'ar' ? 'en' : 'ar';
       localStorage.setItem('lang', currentLang);
@@ -844,7 +878,7 @@
       darkMode = !darkMode;
       document.documentElement.setAttribute('data-theme', darkMode ? 'dark' : '');
       localStorage.setItem('theme', darkMode ? 'dark' : 'light');
-      dom.themeBtn.textContent = darkMode ? '☀️' : '🌙';
+      dom.themeBtn.textContent = darkMode ? '◐' : '◑';
     };
 
     // ─── Particles ───
@@ -938,7 +972,7 @@
     }
     dom.musicBtn.onclick = () => {
       state.musicOn = !state.musicOn;
-      dom.musicBtn.textContent = state.musicOn ? '🔊' : '🔇';
+      dom.musicBtn.textContent = state.musicOn ? '♫' : '♪';
       if (state.musicOn) startMusic(); else stopMusic();
     };
 
@@ -975,12 +1009,12 @@
       for (let i = 0; i < TOTAL_CELLS; i++) {
         const cell = state.cells[i];
         const val = board[i];
-        const cls = 'cell' + (val === 'X' ? ' X' : val === 'O' ? ' O' : '');
+        const cls = 'cell' + (val === 'X' ? ' X' : val === 'O' ? ' O' : val === 'Y' ? ' Y' : val === 'Z' ? ' Z' : '');
         const isWin = winSet && winSet.has(i);
         if (cell.className !== cls + (isWin ? ' win' : '')) {
           cell.className = cls + (isWin ? ' win' : '');
         }
-        const text = val === 'X' ? '🩷' : val === 'O' ? '🩵' : '';
+        const text = val === 'X' ? '🩷' : val === 'O' ? '🩵' : val === 'Y' ? '💛' : val === 'Z' ? '💚' : '';
         if (cell.textContent !== text) cell.textContent = text;
       }
     }
@@ -1008,7 +1042,24 @@
     function listenRoom(ref) {
       const onValue = ref.on('value', snap => {
         const d = snap.val();
-        if (!d || !d.board) return;
+        if (!d || !d.board) {
+          if (!d && state.roomRef) {
+            for (const l of state.listeners) { try { l.ref.off(l.type, l.handler); } catch (_) {} }
+            state.listeners = [];
+            state.roomRef = null; state.roomData = null; state.playerSymbol = ''; state.isMyTurn = false;
+            state.lastWinner = null;
+            stopMusic(); state.musicOn = false; dom.musicBtn.textContent = '♪';
+            dom.game.style.display = 'none'; dom.game.classList.remove('show');
+            dom.login.style.display = 'block'; dom.login.style.animation = 'none';
+            dom.chatFab.style.display = 'none'; dom.chatOverlay.style.display = 'none'; state.chatOpen = false;
+            dom.chatMsgs.textContent = ''; dom.winner.textContent = ''; dom.winner.classList.remove('show');
+            dom.restartBtn.style.display = 'none'; dom.musicBtn.style.display = 'none';
+            dom.p3Name.parentElement.style.display = 'none';
+            dom.p4Name.parentElement.style.display = 'none';
+            dom.roomInput.value = ''; dom.nameInput.value = ''; dom.nameInput.focus();
+          }
+          return;
+        }
         state.roomData = d;
         const board = d.board;
         const winningCells = d.winner ? d.winner.winningCells : null;
@@ -1019,17 +1070,28 @@
           dom.turnText.textContent = state.isMyTurn ? l.yourTurn : l.waitingOpp;
           dom.turnDot.className = 'dot' + (state.isMyTurn ? '' : ' waiting');
         } else if (d.status === 'waiting') {
+          state.isMyTurn = false;
           dom.turnText.textContent = t[currentLang].waiting;
           dom.turnDot.className = 'dot waiting';
         }
         if (d.winner) {
-          const wn = d.winner.symbol === 'X' ? d.players.player1 : d.players.player2;
-          dom.winner.textContent = '🎉 ' + wn + t[currentLang].winSuffix;
-          dom.winner.classList.add('show');
-          Sound.win();
-          dom.restartBtn.style.display = 'inline-flex';
-          fireConfetti();
+          if (d.winner.symbol === 'DRAW') {
+            dom.winner.textContent = t[currentLang].draw;
+            dom.winner.classList.add('show');
+            dom.restartBtn.style.display = 'inline-flex';
+          } else {
+            const wn = d.players[SYMBOL_PLAYER[d.winner.symbol]] || t[currentLang].p1;
+            dom.winner.textContent = '🎉 ' + wn + t[currentLang].winSuffix;
+            dom.winner.classList.add('show');
+            dom.restartBtn.style.display = 'inline-flex';
+            if (state.lastWinner !== d.winner) {
+              state.lastWinner = d.winner;
+              Sound.win();
+              fireConfetti();
+            }
+          }
         } else {
+          state.lastWinner = null;
           dom.winner.textContent = '';
           dom.winner.classList.remove('show');
           dom.restartBtn.style.display = 'none';
@@ -1037,8 +1099,14 @@
         if (d.players) {
           dom.p1Name.textContent = d.players.player1 || t[currentLang].p1;
           dom.p2Name.textContent = d.players.player2 || t[currentLang].p2;
+          dom.p3Name.textContent = d.players.player3 || t[currentLang].p3;
+          dom.p4Name.textContent = d.players.player4 || t[currentLang].p4;
           dom.p1Score.textContent = (d.scores && d.scores.player1) || 0;
           dom.p2Score.textContent = (d.scores && d.scores.player2) || 0;
+          dom.p3Score.textContent = (d.scores && d.scores.player3) || 0;
+          dom.p4Score.textContent = (d.scores && d.scores.player4) || 0;
+          dom.p3Name.parentElement.style.display = d.players.player3 ? 'block' : 'none';
+          dom.p4Name.parentElement.style.display = d.players.player4 ? 'block' : 'none';
         }
       });
       state.listeners.push({ ref, type: 'value', handler: onValue });
@@ -1046,12 +1114,23 @@
       const onMsg = ref.child('messages').on('child_added', snap => {
         const m = snap.val();
         if (!m) return;
-        const isMe = m.sender === state.playerName;
+        const isMe = m.sym ? m.sym === state.playerSymbol : m.sender === state.playerName;
+        const playersHere = state.roomData ? state.roomData.players : null;
+        let sym = m.sym || null;
+        if (!sym && playersHere) {
+          const pk = PLAYER_KEYS.find(k => playersHere[k] === m.sender);
+          sym = pk ? PLAYER_SYMBOL[pk] : null;
+        }
+        const col = sym ? PLAYER_COLORS[sym] : null;
+        const senderHtml = col
+          ? '<div class="msg-sender" style="color:' + col.text + '">' + escapeHtml(m.sender) + '</div>'
+          : '<div class="msg-sender">' + escapeHtml(m.sender) + '</div>';
         const wrap = document.createElement('div');
         wrap.className = 'msg-wrap ' + (isMe ? 'sent' : 'received');
         wrap.dataset.msgtext = m.text;
         const bubble = document.createElement('div');
         bubble.className = 'msg-bubble';
+        if (col) { bubble.style.background = col.bg; bubble.style.borderColor = col.bd; }
         const t = m.text;
         if (t.startsWith('📩 تم إعادة التوجيه') || t.startsWith('📩 Forwarded')) {
           const idx = t.indexOf('\n\n');
@@ -1059,12 +1138,12 @@
           const ci = rest.lastIndexOf('\n\n✏️ ');
           const fwdLabel = t.startsWith('📩 Forwarded') ? '📩 Forwarded' : '📩 تم إعادة التوجيه';
           if (ci > 0) {
-            bubble.innerHTML = '<div class="msg-sender">' + escapeHtml(m.sender) + '</div><div class="msg-fwd"><div class="msg-fwd-label">' + fwdLabel + '</div><div class="msg-fwd-content">' + escapeHtml(rest.slice(0, ci)) + '</div></div><div class="msg-comment">' + escapeHtml(rest.slice(ci + 4)) + '</div>';
+            bubble.innerHTML = senderHtml + '<div class="msg-fwd"><div class="msg-fwd-label">' + fwdLabel + '</div><div class="msg-fwd-content">' + escapeHtml(rest.slice(0, ci)) + '</div></div><div class="msg-comment">' + escapeHtml(rest.slice(ci + 4)) + '</div>';
           } else {
-            bubble.innerHTML = '<div class="msg-sender">' + escapeHtml(m.sender) + '</div><div class="msg-fwd"><div class="msg-fwd-label">' + fwdLabel + '</div><div class="msg-fwd-content">' + escapeHtml(rest) + '</div></div>';
+            bubble.innerHTML = senderHtml + '<div class="msg-fwd"><div class="msg-fwd-label">' + fwdLabel + '</div><div class="msg-fwd-content">' + escapeHtml(rest) + '</div></div>';
           }
         } else {
-          bubble.innerHTML = '<div class="msg-sender">' + escapeHtml(m.sender) + '</div><div class="msg-text">' + escapeHtml(t) + '</div>';
+          bubble.innerHTML = senderHtml + '<div class="msg-text">' + escapeHtml(t) + '</div>';
         }
         wrap.appendChild(bubble);
         dom.chatMsgs.appendChild(wrap);
@@ -1073,7 +1152,7 @@
         if (!isMe) {
           Sound.msg();
           if (!isChatVisible()) {
-            showToast(m.sender, m.text);
+            showToast(m.sender, m.text, sym);
             state.unread++;
             dom.badge.textContent = state.unread;
             dom.badge.style.display = 'flex';
@@ -1091,15 +1170,20 @@
       Sound.click();
       const board = [...d.board];
       board[idx] = state.playerSymbol;
-      const next = state.playerSymbol === 'X' ? 'O' : 'X';
+      const active = PLAYER_KEYS.filter(k => d.players && d.players[k]).map(k => PLAYER_SYMBOL[k]);
+      const next = active[(active.indexOf(state.playerSymbol) + 1) % active.length];
       const win = checkWin(board);
       const updates = { board, turn: next };
       if (win) {
-        const key = win.symbol === 'X' ? 'player1' : 'player2';
-        const scores = { ...(d.scores || { player1: 0, player2: 0 }) };
-        scores[key] = (scores[key] || 0) + 1;
         updates.winner = win;
-        updates.scores = scores;
+        if (active.length > 1) {
+          const key = SYMBOL_PLAYER[win.symbol];
+          const scores = { ...(d.scores || { player1: 0, player2: 0, player3: 0, player4: 0 }) };
+          scores[key] = (scores[key] || 0) + 1;
+          updates.scores = scores;
+        }
+      } else if (!board.some(c => c === '')) {
+        updates.winner = { symbol: 'DRAW', winningCells: [] };
       }
       state.roomRef.update(updates);
     }
@@ -1116,22 +1200,54 @@
     function restartGame() {
       if (!state.roomRef) return;
       for (const cell of state.cells) cell.classList.remove('win');
+      state.lastWinner = null;
       state.roomRef.update({ board: Array(TOTAL_CELLS).fill(''), turn: 'X', winner: null, status: 'playing' });
     }
 
     // ─── Leave Room ───
     function leaveRoom() {
       if (!state.roomRef) return;
+      const roomRef = state.roomRef;
+      const myName = state.playerName || '';
+      const myKey = state.playerSymbol ? SYMBOL_PLAYER[state.playerSymbol] : '';
+      const mySym = state.playerSymbol;
       for (const l of state.listeners) { try { l.ref.off(l.type, l.handler); } catch (_) {} }
       state.listeners = [];
-      state.roomRef.remove();
-      stopMusic(); state.musicOn = false; dom.musicBtn.textContent = '🔇';
+
+      if (myKey && mySym) {
+        roomRef.transaction(cur => {
+          if (!cur || !cur.players || !cur.players[myKey]) return cur;
+          const players = cur.players;
+          const remaining = PLAYER_KEYS.filter(k => k !== myKey && players[k]).length;
+          if (remaining === 0) return null;
+          const next = { ...cur };
+          next.players = { ...players, [myKey]: null };
+          next.scores = { ...(cur.scores || { player1: 0, player2: 0, player3: 0, player4: 0 }), [myKey]: 0 };
+          if (Array.isArray(cur.board)) next.board = cur.board.map(v => v === mySym ? '' : v);
+          if (cur.turn === mySym) {
+            const others = PLAYER_KEYS.filter(k => k !== myKey && players[k]).map(k => PLAYER_SYMBOL[k]);
+            next.turn = others.find(s => SYMBOLS.indexOf(s) > SYMBOLS.indexOf(mySym)) || others[0];
+          }
+          if (remaining < 2) next.status = 'waiting';
+          next.winner = null;
+          return next;
+        }, (e, committed, snap) => {
+          if (!e && committed && snap.val()) {
+            roomRef.child('messages').push().set({ sender: '✨', text: myName + ' ' + t[currentLang].leftMsg, timestamp: Date.now() });
+          }
+        });
+      }
+
+      stopMusic(); state.musicOn = false; dom.musicBtn.textContent = '♪';
       state.roomRef = null; state.roomData = null; state.playerSymbol = ''; state.isMyTurn = false;
+      state.lastWinner = null;
       dom.game.style.display = 'none'; dom.game.classList.remove('show');
       dom.login.style.display = 'block'; dom.login.style.animation = 'none';
       dom.chatFab.style.display = 'none'; dom.chatOverlay.style.display = 'none'; state.chatOpen = false;
       dom.chatMsgs.textContent = ''; dom.winner.textContent = ''; dom.winner.classList.remove('show');
       dom.restartBtn.style.display = 'none'; dom.musicBtn.style.display = 'none';
+      dom.p3Name.parentElement.style.display = 'none';
+      dom.p4Name.parentElement.style.display = 'none';
       dom.roomInput.value = ''; dom.nameInput.value = ''; dom.nameInput.focus();
     }
     dom.exitBtn.onclick = leaveRoom;
@@ -1170,36 +1286,49 @@
             turn: 'X',
             status: 'waiting',
             messages: {},
-            scores: { player1: 0, player2: 0 }
+            scores: { player1: 0, player2: 0, player3: 0, player4: 0 }
+          }, e => {
+            if (e) { onJoinError(t[currentLang].errConn + e.message); return; }
+            state.playerSymbol = 'X';
+            state.isMyTurn = true;
+            enterGame(code);
           });
-          state.playerSymbol = 'X';
-          state.isMyTurn = true;
         } else {
-          if (d.players && d.players.player2) {
-            errToast(t[currentLang].errFull);
-            dom.login.style.display = 'block';
-            dom.game.style.display = 'none';
-            dom.game.classList.remove('show');
-            setLoading(false);
+          const members = PLAYER_KEYS.filter(k => d.players && d.players[k]);
+          if (members.length >= PLAYER_KEYS.length) {
+            onJoinError(t[currentLang].errFull);
             return;
           }
-          state.roomRef.child('players/player2').set(name);
+          const freeSlot = PLAYER_KEYS.find(k => !(d.players && d.players[k]));
+          state.roomRef.child('players/' + freeSlot).set(name);
           state.roomRef.child('status').set('playing');
-          state.playerSymbol = 'O';
+          state.playerSymbol = PLAYER_SYMBOL[freeSlot];
           state.isMyTurn = false;
+          enterGame(code);
         }
-        dom.chatFab.style.display = 'flex';
-        dom.musicBtn.style.display = 'flex';
-        dom.roomTitle.textContent = code;
-        listenRoom(state.roomRef);
-        startMusic();
-        state.musicOn = true;
-        dom.musicBtn.textContent = '🔊';
-        setLoading(false);
       }, err => {
-        errToast(t[currentLang].errConn + err.message);
-        setLoading(false);
+        onJoinError(t[currentLang].errConn + err.message);
       });
+    }
+
+    function onJoinError(msg) {
+      errToast(msg);
+      setLoading(false);
+      state.roomRef = null;
+      dom.login.style.display = 'block';
+      dom.game.style.display = 'none';
+      dom.game.classList.remove('show');
+    }
+
+    function enterGame(code) {
+      dom.chatFab.style.display = 'flex';
+      dom.musicBtn.style.display = 'flex';
+      dom.roomTitle.textContent = code;
+      listenRoom(state.roomRef);
+      startMusic();
+      state.musicOn = true;
+      dom.musicBtn.textContent = '♫';
+      setLoading(false);
     }
 
     // ─── Chat ───
@@ -1207,7 +1336,7 @@
       hideActions();
       const t = dom.chatInput.value.trim();
       if (t && state.roomRef && !state.isComposing) {
-        state.roomRef.child('messages').push().set({ sender: state.playerName, text: t, timestamp: Date.now() });
+        state.roomRef.child('messages').push().set({ sender: state.playerName, sym: state.playerSymbol, text: t, timestamp: Date.now() });
         dom.chatInput.value = '';
         Sound.send();
       }
@@ -1248,13 +1377,15 @@
     dom.chatClose.onclick = closeChat;
 
     // ─── Toast ───
-    function showToast(sender, msg) {
+    function showToast(sender, msg, sym) {
       dom.toastSender.textContent = sender;
       dom.toastMsg.textContent = msg;
-      dom.toastP1.textContent = state.roomData?.players?.player1 || t[currentLang].p1;
-      dom.toastP2.textContent = state.roomData?.players?.player2 || t[currentLang].p2;
-      dom.toastS1.textContent = state.roomData?.scores?.player1 || 0;
-      dom.toastS2.textContent = state.roomData?.scores?.player2 || 0;
+      if (!sym) {
+        const players = state.roomData?.players;
+        const pk = players ? PLAYER_KEYS.find(k => players[k] === sender) : null;
+        sym = pk ? PLAYER_SYMBOL[pk] : null;
+      }
+      dom.toastSender.style.color = sym ? PLAYER_COLORS[sym].text : '';
       dom.toastTime.textContent = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
       closeToast(true);
       setTimeout(() => {
@@ -1313,7 +1444,7 @@
         navigator.clipboard.writeText(state.activeMsgText).then(() => {
           dom.actCopy.textContent = '✓';
           dom.actCopy.style.color = '#16a34a';
-          setTimeout(() => { dom.actCopy.textContent = '📋'; dom.actCopy.style.color = ''; }, 1500);
+          setTimeout(() => { dom.actCopy.textContent = '⧉'; dom.actCopy.style.color = ''; }, 1500);
         }).catch(() => {});
       }
       hideActions();
@@ -1326,7 +1457,15 @@
     // ─── Forward Dialog ───
     function forwardMsg(text) {
       hideActions();
-      const target = state.playerSymbol === 'X' ? dom.p2Name.textContent : dom.p1Name.textContent;
+      const me = state.playerSymbol;
+      let target = '';
+      const roomPlayers = state.roomData && state.roomData.players;
+      for (let i = 1; i < 4; i++) {
+        const sym = SYMBOLS[(SYMBOLS.indexOf(me) + i) % SYMBOLS.length];
+        const name = roomPlayers ? roomPlayers[SYMBOL_PLAYER[sym]] : null;
+        if (name) { target = name; break; }
+      }
+      if (!target) target = t[currentLang].p1;
       dom.forwardTarget.textContent = target;
       dom.forwardPreview.textContent = text;
       dom.forwardComment.value = '';
@@ -1345,7 +1484,7 @@
       if (text && state.roomRef) {
         let msg = t[currentLang].fwdPrefix + '\n\n' + text;
         if (comment) msg += '\n\n✏️ ' + comment;
-        state.roomRef.child('messages').push().set({ sender: state.playerName, text: msg, timestamp: Date.now() });
+        state.roomRef.child('messages').push().set({ sender: state.playerName, sym: state.playerSymbol, text: msg, timestamp: Date.now() });
         Sound.send();
       }
       closeForward();
