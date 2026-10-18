@@ -1342,8 +1342,11 @@
           fireConfetti();
         }
       } else {
-        if (lastWinnerKey !== null) {
+        if (lastWinnerKey !== null || dom.winModal.style.display !== 'none') {
           lastWinnerKey = null;
+          cleanWinModal();
+          dom.restartBtn.style.display = 'none';
+        } else if (!lastWinnerKey) {
           dom.restartBtn.style.display = 'none';
         }
       }
